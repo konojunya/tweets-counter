@@ -1,0 +1,34 @@
+{
+  "name": "tweets-counter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "watchify -o public/dist/bundle.js -v -d public/src/app.js"
+  },
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.13.1",
+    "classnames": "^2.2.5",
+    "events": "^1.1.1",
+    "flux": "^2.1.1",
+    "keymirror": "^0.1.1",
+    "object-assign": "^4.1.0",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1"
+  },
+  "devDependencies": {
+    "browserify": "^13.1.0",
+    "envify": "^3.4.1",
+    "jest-cli": "^14.0.0",
+    "reactify": "^1.1.1",
+    "watchify": "^3.7.0"
+  }
+}
