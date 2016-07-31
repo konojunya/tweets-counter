@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=no">
+	<title></title>
+
+	<link rel="stylesheet" href="/stylesheets/sanitize.min.css">
+</head>
+<body>
+
+	<ul id="order">
+		<li>1位</li>
+		<li v-for="user in gold">
+			<img src="{{user.icon}}" alt="" width="150" height="150">
+			@{{user.username}} {{user.count}}ツイート
+			</li>
+		<li v-if="silver.length" style="border-top: 5px solid skyblue;">2位</li>
+		<li v-for="user in silver">
+			<img src="{{user.icon}}" alt="" width="100" height="100">
+			@{{user.username}} {{user.count}}ツイート
+		</li>
+		<li v-if="bronze.length" style="border-top: 5px solid skyblue;">3位</li>
+		<li v-for="user in bronze">
+			<img src="{{user.icon}}" alt="" width="70" height="70">
+			@{{user.username}} {{user.count}}ツイート
+		</li>
+	</ul>
+
+	<script src="/javascripts/vue.min.js"></script>
+	<script type="text/javascript">
+		var _data = JSON.parse('<%-@data%>');
+		var dataArray = [];
+		for(var key in _data){
+			dataArray.push({
+				username: key,
+				count: _data[key].count,
+				icon: _data[key].icon
+			});
+		}
+		function object_array_sort(data){
+			data = data.sort(function(a, b){
+				var x = a["count"];
+				var y = b["count"];
+				if (x > y) return -1;
+				if (x < y) return 1;
+				return 0;
+			});
+			return data;
+		}
+		_data = object_array_sort(dataArray);
+		var dataCounts = [];
+		_data.map(function(item){
+			dataCounts.push(item.count);
+		});
+		dataCounts = dataCounts.filter(function (x, i, self) {
+			return self.indexOf(x) === i;
+		});
+
+		var orderUser = {
+			gold: [],
+			silver: [],
+			bronze: []
+		}
+
+		_data.map(function(data,i){
+			if(data.count == dataCounts[0]) orderUser.gold.push(data)
+			else if(data.count == dataCounts[1]) orderUser.silver.push(data)
+			else if(data.count == dataCounts[2]) orderUser.bronze.push(data);
+		});
+
+		var vm = new Vue({
+			el: "#order",
+			data: orderUser
+		})
+	</script>
+</body>
+</html>

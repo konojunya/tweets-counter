@@ -5,5 +5,5 @@ var TimeLine = require("./components/App.jsx");
 
 ReactDOM.render(
 	<TimeLine />,
-	document.getElementById("app")
+	document.getElementById("react")
 );

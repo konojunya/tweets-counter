@@ -6,8 +6,17 @@ var assign = require("object-assign");
 var UPDATE_EVENT = "update";
 
 var _tweets = {};
+var _userData = {};
 
-function createTweet(tweet){}
+function tweet(tweet){
+	var userName = tweet.username;
+	_tweets[tweet.id] = {
+		icon: tweet.icon,
+		screenName: tweet.username,
+		body: tweet.body,
+		count: tweet.count
+	}
+}
 
 var AppStore = assign({},EventEmitter.prototype,{
 
@@ -31,10 +40,10 @@ var AppStore = assign({},EventEmitter.prototype,{
 
 AppDispatcher.register(function(action){
 
-	switch(aciton.actionType){
+	switch(action.actionType){
 
 		case AppConstants.CREATE_TWEET:
-			createTweet(action.tweet);
+			tweet(action.tweet);
 			AppStore.emitUpdate();
 			break;
 
