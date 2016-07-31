@@ -25,7 +25,7 @@ var twitter = new Twit({
 });
 var count = 0;
 var _userData = {};
-var userTimeLine = twitter.stream("statuses/filter",{track: 'hello'});
+var userTimeLine = twitter.stream("statuses/filter",{track: ['イッテQ']});
 userTimeLine.on("tweet",function(tweet){
 	if(_userData[tweet.user.screen_name]){
 		_userData[tweet.user.screen_name].count += 1;
@@ -33,6 +33,7 @@ userTimeLine.on("tweet",function(tweet){
 		_userData[tweet.user.screen_name] = {
 			count: 1,
 			icon: tweet.user.profile_image_url_https.replace(/_normal/,""),
+			name: tweet.user.name
 		}
 	}
 	var data = {

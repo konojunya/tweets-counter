@@ -6,37 +6,83 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=no">
 	<title></title>
 
-	<link rel="stylesheet" href="/stylesheets/sanitize.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/4.1.0/sanitize.min.css">
+	<link rel="stylesheet" href="/stylesheets/order.css">
 </head>
 <body>
 
+	<div class="triangle bgNavy"></div>
+	<div class="triangle bgBrown"></div>
+
+	<div class="curtain right"></div>
+	<div class="curtain left"></div>
+
 	<ul id="order">
-		<li>1位</li>
-		<li v-for="user in gold">
-			<img src="{{user.icon}}" alt="" width="150" height="150">
-			@{{user.username}} {{user.count}}ツイート
-			</li>
-		<li v-if="silver.length" style="border-top: 5px solid skyblue;">2位</li>
-		<li v-for="user in silver">
-			<img src="{{user.icon}}" alt="" width="100" height="100">
-			@{{user.username}} {{user.count}}ツイート
+
+		<li v-for="user in gold" class="gold">
+			<div class="clearfix">
+				<div class="img">
+					<div class="icon gold-icon" style="background-image: url({{user.icon}})"></div>
+					<img src="/images/gold.png" class="medal gold-medal">
+				</div>
+				<div class="cover">
+					<p class="name">{{user.name}} @{{user.username}}</p>
+					<p class="tweet-num">{{user.count}}ツイート!!!</p>
+				</div>
+			</div>
 		</li>
-		<li v-if="bronze.length" style="border-top: 5px solid skyblue;">3位</li>
-		<li v-for="user in bronze">
-			<img src="{{user.icon}}" alt="" width="70" height="70">
-			@{{user.username}} {{user.count}}ツイート
+
+		<li v-for="user in silver" class="silver">
+			<div class="clearfix">
+				<div class="img">
+					<div class="icon silver-icon" style="background-image: url({{user.icon}})"></div>
+					<img src="/images/silver.png" class="medal silver-medal">
+				</div>
+				<div class="cover">
+					<p class="name">{{user.name}} @{{user.username}}</p>
+					<p class="tweet-num">{{user.count}}ツイート!!</p>
+				</div>
+			</div>
 		</li>
+
+		<li v-for="user in bronze" class="bronze">
+			<div class="clearfix">
+				<div class="img">
+					<div class="icon bronze-icon" style="background-image: url({{user.icon}})"></div>
+					<img src="/images/bronze.png" class="medal bronze-medal">
+				</div>
+				<div class="cover">
+					<p class="name">{{user.name}} @{{user.username}}</p>
+					<p class="tweet-num">{{user.count}}ツイート!</p>
+				</div>
+			</div>
+		</li>
+
 	</ul>
 
+	<p id="data" style="display: none;"><%- @data %></p>
+
+	<script src="/javascripts/tweenmax.min.js"></script>
 	<script src="/javascripts/vue.min.js"></script>
 	<script type="text/javascript">
-		var _data = JSON.parse('<%-@data%>');
+		/*
+		*		animation
+		*/
+		window.onkeydown = function(e){
+			if(e.keyCode === 13){
+				TweenMax.to('.right', 2, { right: "-45%" });
+				TweenMax.to('.left', 2, { left: "-45%" });
+			}
+		}
+
+		var _data = JSON.parse(document.getElementById("data").innerHTML);
 		var dataArray = [];
 		for(var key in _data){
 			dataArray.push({
 				username: key,
 				count: _data[key].count,
-				icon: _data[key].icon
+				icon: _data[key].icon,
+				name: _data[key].name
 			});
 		}
 		function object_array_sort(data){
