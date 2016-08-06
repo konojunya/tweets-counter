@@ -25,7 +25,7 @@ var twitter = new Twit({
 });
 var count = 0;
 var _userData = {};
-var userTimeLine = twitter.stream("statuses/filter",{track: ['イッテQ']});
+var userTimeLine = twitter.stream("statuses/filter",{track: ['react']});
 userTimeLine.on("tweet",function(tweet){
 	if(_userData[tweet.user.screen_name]){
 		_userData[tweet.user.screen_name].count += 1;

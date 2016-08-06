@@ -17,13 +17,7 @@ body,html{
 #order{
 	width: 70%;
 	margin: 0 auto;
-	font-size: 2.3rem;
-}
-#order .silver{
-	font-size: 1.6rem;
-}
-#order .bronze{
-	font-size: 1.3rem;
+	font-size: 1.5rem;
 }
 #order li{
 	width: 100%;
@@ -32,11 +26,10 @@ body,html{
 	color: #2C2C2C;
 }
 #order li.gold{
-	margin: 40px auto 10%;
-	border-bottom: 10px solid rgb(249,216,64);
+	border-bottom: 3px solid rgb(249,216,64);
 }
 #order li.silver{
-	border-bottom: 7px solid rgb(220,220,220);
+	border-bottom: 3px solid #838383;
 }
 #order li.bronze{
 	border-bottom: 3px solid rgba(215,131,0,0.6);
@@ -49,13 +42,13 @@ body,html{
 	margin-top: 30px;
 }
 #order .gold .tweet-num{
-	font-size: 5rem;
-}
-#order .silver .tweet-num{
 	font-size: 3rem;
 }
-#order .bronze .tweet-num{
+#order .silver .tweet-num{
 	font-size: 2rem;
+}
+#order .bronze .tweet-num{
+	font-size: 1.7rem;
 }
 
 
